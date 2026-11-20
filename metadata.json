@@ -1,0 +1,6 @@
+{
+  "name": "B. Bavadharani — Portfolio Library",
+  "description": "An interactive magical-library portfolio for B. Bavadharani, Data Analyst & Web Developer, featuring cursor-tracking portrait motion, a paper-rocket cursor, and 3D readable books.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

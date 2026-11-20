@@ -1,0 +1,341 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --font-foil: "Cinzel Decorative", Georgia, serif;
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-body: "EB Garamond", Georgia, serif;
+  --font-hand: "Caveat", cursive;
+
+  /* Open Book Spread Typography */
+  --font-book-body: "Crimson Pro", Georgia, serif;
+  --font-book-heading: "IM Fell English", "Cormorant Garamond", serif;
+  --font-book-note: "Caveat", cursive;
+
+  /* Sunlit Reading Room (Light Mode) */
+  --bg-room: #f5ede0;
+  --bg-room-elevated: #ece0cc;
+  --bg-desk: #69422a;
+  --bg-walnut: #4c2e1c;
+  --bg-walnut-deep: #362013;
+  --bg-parchment: #faf2e2;
+  --bg-parchment-alt: #f1e3c4;
+  --text-primary: #1c1a2e;
+  --text-secondary: #3f3544;
+  --text-muted: #5d4f5b;
+  --ink-color: #1c1a2e;
+  --accent-amber: #c97316;
+  --accent-gold: #a67417;
+  --border-subtle: rgba(59, 36, 22, 0.16);
+  --lamp-glow: rgba(255, 179, 71, 0.25);
+  --vignette-color: rgba(59, 36, 22, 0.14);
+}
+
+html.dark {
+  /* Cozy Night Library (Default Mode) */
+  --bg-room: #15101c;
+  --bg-room-elevated: #1f1729;
+  --bg-desk: #3b2416;
+  --bg-walnut: #3b2416;
+  --bg-walnut-deep: #24150c;
+  --bg-parchment: #f3e6c8;
+  --bg-parchment-alt: #e7d5af;
+  --text-primary: #f5ead2;
+  --text-secondary: #dfd0b3;
+  --text-muted: #b6a58f;
+  --ink-color: #1c1a2e;
+  --accent-amber: #ffb347;
+  --accent-gold: #e4b456;
+  --border-subtle: rgba(243, 230, 200, 0.14);
+  --lamp-glow: rgba(255, 179, 71, 0.34);
+  --vignette-color: rgba(8, 5, 12, 0.68);
+}
+
+@layer base {
+  html {
+    background-color: var(--bg-room);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--bg-room);
+    color: var(--text-primary);
+    font-family: var(--font-body);
+    font-size: 1.15rem;
+    font-weight: 400;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-wrap: balance;
+  }
+}
+
+.font-foil {
+  font-family: var(--font-foil);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: 0.02em;
+}
+
+.font-body {
+  font-family: var(--font-body);
+  font-size: 1.15rem;
+  line-height: 1.7;
+}
+
+.font-hand {
+  font-family: var(--font-hand);
+  font-weight: 500;
+}
+
+/* Open Book Spread Scoped Typography */
+.book-page-content {
+  font-family: var(--font-book-body);
+  color: #1c1a2e;
+  font-size: clamp(0.95rem, 0.88rem + 0.35vw, 1.15rem);
+  line-height: clamp(1.5, 1.46 + 0.14vw, 1.65);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.book-heading {
+  font-family: var(--font-book-heading);
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  color: #181426;
+}
+
+.book-title {
+  font-family: var(--font-book-heading);
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  color: #181426;
+  font-size: clamp(1.35rem, 1.1rem + 0.9vw, 1.85rem);
+  line-height: 1.2;
+}
+
+.book-subtitle {
+  font-family: var(--font-book-heading);
+  letter-spacing: 0.02em;
+  font-weight: 400;
+  color: #181426;
+  font-size: clamp(1.12rem, 0.98rem + 0.55vw, 1.48rem);
+  line-height: 1.25;
+}
+
+.book-body {
+  font-family: var(--font-book-body);
+  font-size: clamp(0.95rem, 0.88rem + 0.35vw, 1.15rem);
+  line-height: clamp(1.5, 1.46 + 0.14vw, 1.65);
+  color: #211b2b;
+}
+
+.book-note {
+  font-family: var(--font-book-note);
+  font-weight: 500;
+  font-size: clamp(0.98rem, 0.92rem + 0.25vw, 1.18rem);
+}
+
+.book-dropcap::first-letter {
+  float: left;
+  margin-right: 0.5rem;
+  margin-top: 0.1rem;
+  font-family: var(--font-book-heading);
+  font-size: clamp(2.35rem, 2.05rem + 0.95vw, 3.05rem);
+  line-height: 0.85;
+  color: #74321e;
+}
+
+/* Slim parchment-styled scrollbar safety net for open book pages */
+@layer components {
+  .book-page-scroll {
+    max-height: 100%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(116, 50, 30, 0.38) rgba(59, 36, 22, 0.06);
+  }
+
+  .book-page-scroll::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .book-page-scroll::-webkit-scrollbar-track {
+    background: rgba(59, 36, 22, 0.06);
+    border-radius: 9999px;
+  }
+
+  .book-page-scroll::-webkit-scrollbar-thumb {
+    background-color: rgba(116, 50, 30, 0.38);
+    border-radius: 9999px;
+  }
+
+  .book-page-scroll::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(116, 50, 30, 0.58);
+  }
+}
+
+/* Custom Paper Rocket Cursor hiding when active on fine-pointer devices */
+html.paper-rocket-cursor-active,
+html.paper-rocket-cursor-active * {
+  cursor: none !important;
+}
+
+/* Subtle Walnut Wood Grain */
+.wood-grain {
+  background-color: var(--bg-walnut);
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 224, 178, 0.025) 0px,
+      rgba(255, 224, 178, 0.025) 2px,
+      transparent 2px,
+      transparent 9px
+    ),
+    repeating-linear-gradient(
+      88deg,
+      rgba(0, 0, 0, 0.18) 0px,
+      rgba(0, 0, 0, 0.18) 3px,
+      transparent 3px,
+      transparent 17px
+    ),
+    linear-gradient(180deg, rgba(255, 200, 140, 0.06) 0%, rgba(0, 0, 0, 0.25) 100%);
+}
+
+/* Subtle Parchment Grain */
+.parchment-surface {
+  background-color: var(--bg-parchment);
+  color: var(--ink-color);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.35), transparent 55%),
+    radial-gradient(circle at 80% 80%, rgba(168, 128, 72, 0.12), transparent 60%),
+    repeating-linear-gradient(
+      0deg,
+      rgba(120, 88, 46, 0.02) 0px,
+      rgba(120, 88, 46, 0.02) 1px,
+      transparent 1px,
+      transparent 4px
+    );
+}
+
+/* Ruled Stationery Paper */
+.ruled-paper {
+  background-color: #f6ebd3;
+  color: #1c1a2e;
+  background-image:
+    linear-gradient(90deg, transparent 44px, rgba(176, 76, 66, 0.24) 44px, rgba(176, 76, 66, 0.24) 45.5px, transparent 45.5px),
+    repeating-linear-gradient(
+      180deg,
+      transparent 0px,
+      transparent 35px,
+      rgba(59, 36, 22, 0.13) 35px,
+      rgba(59, 36, 22, 0.13) 36px
+    );
+}
+
+/* Atmospheric Room Vignette */
+.library-vignette {
+  background: radial-gradient(
+    ellipse at 50% 35%,
+    transparent 45%,
+    var(--vignette-color) 100%
+  );
+}
+
+/* 3D Book Spread & Page Turn */
+.book-stage {
+  perspective: 2200px;
+}
+
+.book-3d-shell {
+  transform-style: preserve-3d;
+}
+
+.book-flip-leaf {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Book Spine 3D Shading */
+.spine-lighting {
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.04) 22%,
+    rgba(0, 0, 0, 0.08) 72%,
+    rgba(0, 0, 0, 0.34) 100%
+  );
+}
+
+@keyframes candle-flicker {
+  0%,
+  100% {
+    transform: scale(1) rotate(-1deg);
+    opacity: 0.92;
+  }
+  50% {
+    transform: scale(1.06, 1.12) rotate(2deg);
+    opacity: 1;
+  }
+}
+
+@keyframes bookmark-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(7px);
+  }
+}
+
+.animate-candle {
+  animation: candle-flicker 2.4s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
+.animate-bookmark-bob {
+  animation: bookmark-bob 2.2s ease-in-out infinite;
+}
+
+/* Tabular numbers utility */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Focus rings */
+:focus-visible {
+  outline: 2px solid var(--accent-amber);
+  outline-offset: 3px;
+}
+
+/* Reduced Motion Respect */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .animate-candle,
+  .animate-bookmark-bob {
+    animation: none !important;
+  }
+}
